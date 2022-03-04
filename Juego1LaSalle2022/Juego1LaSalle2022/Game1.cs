@@ -8,9 +8,12 @@ namespace Juego1LaSalle2022
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        
         byte green;
         byte red;
         byte blue;
+
+        Texture2D spriteBottle;
 
         public Game1()
         {
@@ -25,9 +28,10 @@ namespace Juego1LaSalle2022
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            red = 123;
-            green = 255;
+            red = 255;
+            green = 123;
             blue = 0;
+
             base.Initialize();
         }
 
@@ -36,17 +40,21 @@ namespace Juego1LaSalle2022
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            spriteBottle = this.Content.Load<Texture2D>("Sprite_sprite");
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
             // TODO: Add your update logic here
+            
             red--;
-            blue--;
             green++;
+            blue++;
+            
+
 
             base.Update(gameTime);
         }
@@ -54,7 +62,11 @@ namespace Juego1LaSalle2022
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(new Color(red,green,blue));
+            _spriteBatch.Begin();
 
+            _spriteBatch.Draw(spriteBottle, new Vector2(540,150),Color.White);
+
+            _spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
